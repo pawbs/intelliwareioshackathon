@@ -318,7 +318,7 @@
 			baseConfigurationReference = 75E2F17075E2CB3000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZJ4UT748D8;
+				DEVELOPMENT_TEAM = 57R5VXANS9;
 				INFOPLIST_FILE = ARMultiuser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -335,7 +335,7 @@
 			baseConfigurationReference = 75E2F17075E2CB3000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZJ4UT748D8;
+				DEVELOPMENT_TEAM = 57R5VXANS9;
 				INFOPLIST_FILE = ARMultiuser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

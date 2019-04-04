@@ -19,6 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var sendMapButton: UIButton!
     @IBOutlet weak var mappingStatusLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var goodBadTryControl: UISegmentedControl!
     
     // MARK: - View Life Cycle
     
@@ -84,8 +85,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if let name = anchor.name, name.hasPrefix("panda") {
-            node.addChildNode(loadRedPandaModel(cardtext: "Textasdassadf"))
-            node.addChildNode(createTextNode(string: "some card try here"))
+            var color: UIColor
+            if (goodBadTryControl.selectedSegmentIndex == 0) {
+                // Green
+                color = UIColor.green
+            } else if (goodBadTryControl.selectedSegmentIndex == 1) {
+                // Red
+                color = UIColor.red
+            } else {
+                // Blue
+                color = UIColor.blue
+            }
+            node.addChildNode(loadRedPandaModel())
+            node.addChildNode(createTextNode(string: inputTextField.text!, color: color))
         }
     }
     
@@ -244,28 +256,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     // MARK: - AR session management
-    private func loadRedPandaModel(cardtext: String) -> SCNNode {
+    private func loadRedPandaModel() -> SCNNode {
         let sceneURL = Bundle.main.url(forResource: "max", withExtension: "scn", subdirectory: "Assets.scnassets")!
         
         let referenceNode = SCNReferenceNode(url: sceneURL)!
         referenceNode.load()
-        if let textNode = referenceNode.childNode(withName: "text", recursively: true) as? SCNText { textNode.string = "sadfasdfsadfsafd" }
     
         return referenceNode
     }
     
-    private func createTextNode(string: String) -> SCNNode {
+    private func createTextNode(string: String, color: UIColor) -> SCNNode {
         let text = SCNText(string: string, extrusionDepth: 0.1)
         text.font = UIFont.systemFont(ofSize: 1.0)
         text.flatness = 0.01
-        text.firstMaterial?.diffuse.contents = UIColor.white
+        text.firstMaterial?.diffuse.contents = color
         text.isWrapped = true
         
         let textNode = SCNNode(geometry: text)
         
         let fontSize = Float(0.02)
         textNode.scale = SCNVector3(fontSize, fontSize, fontSize)
-        textNode.position = SCNVector3(-0.05, -0.03, 0);
+        textNode.position = SCNVector3(-0.05, 0, 0);
         textNode.eulerAngles = SCNVector3(-0.5, 0, 0);
         
         return textNode
