@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7dh-A0-qGE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hkh-nh-UV1">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37h-bD-Iyn">
-                                <rect key="frame" x="20" y="40" width="191" height="38"/>
+                                <rect key="frame" x="20" y="84" width="191" height="38"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pkc-hu-yuO">
                                     <rect key="frame" x="0.0" y="0.0" width="191" height="38"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +72,7 @@
                                 </userDefinedRuntimeAttributes>
                             </visualEffectView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOo-FY-E3u" userLabel="Restart Experience Button Icon">
-                                <rect key="frame" x="362" y="20" width="52" height="60"/>
+                                <rect key="frame" x="362" y="64" width="52" height="60"/>
                                 <inset key="contentEdgeInsets" minX="8" minY="25" maxX="24" maxY="12"/>
                                 <state key="normal" image="restart"/>
                                 <state key="selected" image="restartPressed"/>
@@ -95,6 +95,13 @@
                                     <segment title="Try"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IIR-Kc-Whg">
+                                <rect key="frame" x="360" y="664" width="30" height="30"/>
+                                <state key="normal" image="grid"/>
+                                <connections>
+                                    <segue destination="b2M-vV-9VS" kind="show" id="2fI-Pc-nZ2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -117,9 +124,12 @@
                             <constraint firstItem="71x-2l-AWw" firstAttribute="trailing" secondItem="Qz3-BO-GPo" secondAttribute="trailing" constant="16" id="tI4-u6-bSu"/>
                             <constraint firstAttribute="top" secondItem="BrB-h1-WRS" secondAttribute="top" id="ulI-xa-35w"/>
                             <constraint firstItem="71x-2l-AWw" firstAttribute="trailing" secondItem="3gO-jJ-aZh" secondAttribute="trailing" constant="16" id="wOX-bG-mXj"/>
+                            <constraint firstItem="IIR-Kc-Whg" firstAttribute="centerY" secondItem="gad-7G-M17" secondAttribute="centerY" id="wco-J5-uyr"/>
+                            <constraint firstItem="71x-2l-AWw" firstAttribute="trailing" secondItem="IIR-Kc-Whg" secondAttribute="trailing" constant="24" id="wei-2n-Ike"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="71x-2l-AWw"/>
                     </view>
+                    <navigationItem key="navigationItem" id="rkq-kC-rKE"/>
                     <connections>
                         <outlet property="goodBadTryControl" destination="3gO-jJ-aZh" id="hbQ-fR-eGK"/>
                         <outlet property="inputTextField" destination="Qz3-BO-GPo" id="rbX-jw-Zek"/>
@@ -140,8 +150,76 @@
             </objects>
             <point key="canvasLocation" x="1029.5999999999999" y="-222.63868065967017"/>
         </scene>
+        <!--Card Collection View Controller-->
+        <scene sceneID="CFg-t2-6pf">
+            <objects>
+                <collectionViewController id="b2M-vV-9VS" customClass="CardCollectionViewController" customModule="ARMultiuser" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="oVC-a3-2q3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4cb-M4-uCD">
+                            <size key="itemSize" width="150" height="150"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="16" minY="16" maxX="16" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCell" id="4eA-Xc-8gY" customClass="CardCollectionViewCell" customModule="ARMultiuser" customModuleProvider="target">
+                                <rect key="frame" x="16" y="16" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72T-AZ-dvc">
+                                            <rect key="frame" x="13" y="13" width="124" height="124"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="72T-AZ-dvc" firstAttribute="leading" secondItem="4eA-Xc-8gY" secondAttribute="leading" constant="13" id="DtT-b2-x7d"/>
+                                    <constraint firstItem="72T-AZ-dvc" firstAttribute="top" secondItem="4eA-Xc-8gY" secondAttribute="top" constant="13" id="Mzs-Qk-m17"/>
+                                    <constraint firstAttribute="trailing" secondItem="72T-AZ-dvc" secondAttribute="trailing" constant="13" id="VIs-8j-R4Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="72T-AZ-dvc" secondAttribute="bottom" constant="13" id="wyx-qV-GHU"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="textLabel" destination="72T-AZ-dvc" id="2HM-BJ-BFL"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="b2M-vV-9VS" id="gpa-dg-euh"/>
+                            <outlet property="delegate" destination="b2M-vV-9VS" id="ZOR-z4-U7b"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tdx-Pd-GTr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2020" y="-223"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CgW-Po-lIL">
+            <objects>
+                <navigationController id="hkh-nh-UV1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="USJ-fi-XVR">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7dh-A0-qGE" kind="relationship" relationship="rootViewController" id="uzb-z5-e2N"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lYv-ac-bJF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="162" y="-223"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="grid" width="30" height="30"/>
         <image name="restart" width="20" height="23"/>
         <image name="restartPressed" width="20" height="23"/>
     </resources>
