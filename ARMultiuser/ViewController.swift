@@ -184,7 +184,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             else { fatalError("can't encode anchor") }
         self.multipeerSession.sendToAllPeers(data)
 
-        guard let cardData = try? NSKeyedArchiver.archivedData(withRootObject: card, requiringSecureCoding: true)
+        guard let cardData = try? NSKeyedArchiver.archivedData(withRootObject: card, requiringSecureCoding: false)
             else { fatalError("can't encode card") }
         self.multipeerSession.sendToAllPeers(cardData)
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class Card : NSObject, NSCoding {
+@objc class Card : NSObject, NSCoding, Codable {
     
     static var types:[String] = [ "Good", "Bad", "Try" ]
     var text:String
@@ -26,6 +26,7 @@ import Foundation
     }
     
     func encode(with coder: NSCoder) {
+        print("encode method invoked")
         coder.encode(self.text, forKey:"text")
         coder.encode(self.type, forKey: "type")
     }
