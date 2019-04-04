@@ -124,30 +124,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
             print(name[iColor])
             if (name[iColor] == "0") {
-                // Green
-                color = UIColor.green
+                // Blue
+                color = UIColor.init(red: 155.0/255.0, green: 192.0/255.0, blue: 226.0/255.0, alpha: 1)
                 type = Card.types[0]
                 
             } else if (name[iColor] == "1") {
                 // Red
-                color = UIColor.red
+                color = UIColor.init(red: 249.0/255.0, green: 123.0/255.0, blue: 118.0/255.0, alpha: 1)
                 type = Card.types[1]
             } else {
-                // Blue
-                color = UIColor.blue
+                // Gold
+                color = UIColor.init(red: 243.0/255.0, green: 207.0/255.0, blue: 98.0/255.0, alpha: 1)
                 type = Card.types[2]
 
             }
                         
             node.addChildNode(loadRedPandaModel())
-            node.addChildNode(createTextNode(string: String(name.dropFirst(5)), color: color))
+            node.addChildNode(createBoxNode(color: color))
+            node.addChildNode(createTextNode(string: String(name.dropFirst(5))))
             
             let card = Card(text: String(name.dropFirst(5)), type: type)
             CardDeck.instance.cards.append(card)
-            
         }
-        
-        
     }
     
     // MARK: - ARSessionDelegate
@@ -333,11 +331,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         return referenceNode
     }
     
-    private func createTextNode(string: String, color: UIColor) -> SCNNode {
+    private func createTextNode(string: String) -> SCNNode {
         let text = SCNText(string: string, extrusionDepth: 0.05)
         text.font = UIFont.systemFont(ofSize: 1)
         text.flatness = 0.01
-        text.firstMaterial?.diffuse.contents = color
         
         text.containerFrame = CGRect(x: 0, y: 0.5, width: 4, height: 5)
         text.isWrapped = true
@@ -352,6 +349,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         return textNode
     }
     
+    private func createBoxNode(color: UIColor) -> SCNNode {
+        let box = SCNBox(width: 0.1, height: 0.01, length: 0.1, chamferRadius: 0.01)
+        box.firstMaterial?.diffuse.contents = color
+        box.firstMaterial?.diffuse.textureComponents = SCNColorMask()
+        
+        let boxNode = SCNNode(geometry: box)
+        return boxNode
+    }
     
 }
 
