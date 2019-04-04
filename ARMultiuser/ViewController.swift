@@ -92,8 +92,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         if let name = anchor.name, name.hasPrefix("card") {
             var color: UIColor
-            print("HURRDURR")
-            print(name)
             let iColor = name.index(name.startIndex, offsetBy: 4)
 
             print(name[iColor])
