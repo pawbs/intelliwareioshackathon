@@ -184,8 +184,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         anchorName = "card" + String(goodBadTryControl.selectedSegmentIndex) + inputTextField.text!
         let anchor = ARAnchor(name: anchorName, transform: hitTestResult.worldTransform)
 
-        let card = Card(text: self.inputTextField.text!, type:Card.types[self.goodBadTryControl.selectedSegmentIndex]);
-        CardDeck.instance.cards .append(card);
+//        let card = Card(text: self.inputTextField.text!, type:Card.types[self.goodBadTryControl.selectedSegmentIndex]);
+//        CardDeck.instance.cards .append(card);
         
         sceneView.session.add(anchor: anchor)
         
