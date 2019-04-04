@@ -205,6 +205,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     /// - Tag: ReceiveData
     func receivedData(_ data: Data, from peer: MCPeerID) {
         
+        print(String.init(data:data, encoding: String.Encoding.utf8))
         do {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
                 // Run the session with the received world map.
