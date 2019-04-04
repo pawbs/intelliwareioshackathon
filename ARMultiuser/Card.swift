@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class Card : NSObject, NSCoding, Codable {
+@objc class Card : NSObject, Codable {
     
     static var types:[String] = [ "Good", "Bad", "Try" ]
     var text:String
@@ -26,20 +26,9 @@ import Foundation
         type = try values.decode(String.self, forKey: .type)
     }
     
-    required convenience init?(coder decoder: NSCoder) {
-        let text = decoder.decodeObject(forKey: "text") as! String
-        let type = decoder.decodeObject(forKey: "type") as! String
-        self.init(text:text, type:type)
-    }
-    
     init(text:String, type:String) {
         self.text = text
         self.type = type
-    }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(self.text, forKey:"text")
-        coder.encode(self.type, forKey: "type")
     }
     
     func encode(to encoder: Encoder) throws {

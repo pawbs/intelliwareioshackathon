@@ -184,9 +184,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             else { fatalError("can't encode anchor") }
         self.multipeerSession.sendToAllPeers(data)
 
-        guard let cardData = try? NSKeyedArchiver.archivedData(withRootObject: card, requiringSecureCoding: false)
-            else { fatalError("can't encode card") }
-        self.multipeerSession.sendToAllPeers(cardData)
+        do {
+            let cardData = try JSONEncoder().encode(card)
+            self.multipeerSession.sendToAllPeers(cardData)
+        } catch {
+            print(error)
+        }
     }
     
     /// - Tag: GetWorldMap
@@ -205,9 +208,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     /// - Tag: ReceiveData
     func receivedData(_ data: Data, from peer: MCPeerID) {
         
-        print(String.init(data:data, encoding: String.Encoding.utf8))
+        print("number of bytes of data: \(data.count)")
         do {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
+                print("worldMap received")
+                
                 // Run the session with the received world map.
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.planeDetection = .horizontal
@@ -219,23 +224,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             }
             else
             if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: data) {
+                print("anchor received")
                 // Add anchor to the session, ARSCNView delegate adds visible content.
                 sceneView.session.add(anchor: anchor)
-            }
-            else {
-                print("unknown data recieved from \(peer)")
+            } else {
+                do {
+                    let card = try JSONDecoder().decode(Card.self, from:data)
+                    print("card received")
+                    CardDeck.instance.cards.append(card)
+                } catch {
+                    print(error)
+                }
             }
         } catch {
             print("can't decode data recieved from \(peer)")
-        }
-        
-        do {
-            if let card = try NSKeyedUnarchiver.unarchivedObject(ofClass: Card.self, from: data) {
-                CardDeck.instance.cards.append(card)
-            }
-
-        } catch {
-            print("can't decode card data recieved from \(peer)")
         }
     }
     
