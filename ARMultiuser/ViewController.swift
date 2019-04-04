@@ -92,22 +92,32 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         if let name = anchor.name, name.hasPrefix("card") {
             var color: UIColor
+            var type:String
             let iColor = name.index(name.startIndex, offsetBy: 4)
 
             print(name[iColor])
             if (name[iColor] == "0") {
                 // Green
                 color = UIColor.green
+                type = Card.types[0]
+                
             } else if (name[iColor] == "1") {
                 // Red
                 color = UIColor.red
+                type = Card.types[1]
             } else {
                 // Blue
                 color = UIColor.blue
+                type = Card.types[2]
+
             }
                         
             node.addChildNode(loadRedPandaModel())
             node.addChildNode(createTextNode(string: String(name.dropFirst(5)), color: color))
+            
+            let card = Card(text: String(name.dropFirst(5)), type: type)
+            CardDeck.instance.cards.append(card)
+            
         }
         
         
@@ -184,12 +194,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             else { fatalError("can't encode anchor") }
         self.multipeerSession.sendToAllPeers(data)
 
-        do {
-            let cardData = try JSONEncoder().encode(card)
-            self.multipeerSession.sendToAllPeers(cardData)
-        } catch {
-            print(error)
-        }
+//        do {
+//            let cardData = try JSONEncoder().encode(card)
+//            self.multipeerSession.sendToAllPeers(cardData)
+//        } catch {
+//            print(error)
+//        }
     }
     
     /// - Tag: GetWorldMap
@@ -228,13 +238,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 // Add anchor to the session, ARSCNView delegate adds visible content.
                 sceneView.session.add(anchor: anchor)
             } else {
-                do {
-                    let card = try JSONDecoder().decode(Card.self, from:data)
-                    print("card received")
-                    CardDeck.instance.cards.append(card)
-                } catch {
-                    print(error)
-                }
+                print("error: not found")
             }
         } catch {
             print("can't decode data recieved from \(peer)")

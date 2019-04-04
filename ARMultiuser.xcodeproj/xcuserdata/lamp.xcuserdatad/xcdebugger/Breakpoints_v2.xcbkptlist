@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARMultiuser/ViewController.swift"
-            timestampString = "576091752.145775"
+            timestampString = "576099292.271562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "updateSessionInfoLabel(for:trackingState:)"
             landmarkType = "7">
          </BreakpointContent>
