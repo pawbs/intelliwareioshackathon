@@ -70,7 +70,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if let name = anchor.name, name.hasPrefix("panda") {
-            node.addChildNode(loadRedPandaModel())
+            node.addChildNode(loadRedPandaModel(cardtext: "Textasdassadf"))
         }
     }
     
@@ -229,11 +229,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     // MARK: - AR session management
-    private func loadRedPandaModel() -> SCNNode {
+    private func loadRedPandaModel(cardtext: String) -> SCNNode {
         let sceneURL = Bundle.main.url(forResource: "max", withExtension: "scn", subdirectory: "Assets.scnassets")!
+        
         let referenceNode = SCNReferenceNode(url: sceneURL)!
         referenceNode.load()
-        
+        if let textNode = referenceNode.childNode(withName: "text", recursively: true) as? SCNText { textNode.string = "sadfasdfsadfsafd" }
+    
         return referenceNode
     }
 }
