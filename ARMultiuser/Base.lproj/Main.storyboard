@@ -82,13 +82,13 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qz3-BO-GPo">
-                                <rect key="frame" x="16" y="616" width="382" height="30"/>
+                                <rect key="frame" x="16" y="596" width="382" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3gO-jJ-aZh" userLabel="Good Bad Try Toggle">
-                                <rect key="frame" x="16" y="572" width="382" height="29"/>
+                                <rect key="frame" x="16" y="552" width="382" height="29"/>
                                 <segments>
                                     <segment title="Good"/>
                                     <segment title="Bad"/>
@@ -110,10 +110,10 @@
                             <constraint firstItem="cOo-FY-E3u" firstAttribute="trailing" secondItem="71x-2l-AWw" secondAttribute="trailing" id="98g-WD-pt7"/>
                             <constraint firstItem="Qz3-BO-GPo" firstAttribute="top" secondItem="3gO-jJ-aZh" secondAttribute="bottom" constant="16" id="9W3-o1-xlm"/>
                             <constraint firstItem="37h-bD-Iyn" firstAttribute="top" secondItem="71x-2l-AWw" secondAttribute="top" constant="20" id="BFW-Is-OAQ"/>
-                            <constraint firstItem="gad-7G-M17" firstAttribute="top" secondItem="Qz3-BO-GPo" secondAttribute="bottom" constant="16" id="MmO-5a-dbm"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="71x-2l-AWw" secondAttribute="leading" id="QIa-Ri-qJo"/>
                             <constraint firstItem="Qz3-BO-GPo" firstAttribute="leading" secondItem="71x-2l-AWw" secondAttribute="leading" constant="16" id="RCS-DD-qTX"/>
                             <constraint firstItem="gad-7G-M17" firstAttribute="top" secondItem="aD6-EU-VHg" secondAttribute="bottom" constant="8" id="TSK-DU-DFL"/>
+                            <constraint firstItem="71x-2l-AWw" firstAttribute="bottom" secondItem="Qz3-BO-GPo" secondAttribute="bottom" constant="110" id="Tf0-EL-44t"/>
                             <constraint firstItem="37h-bD-Iyn" firstAttribute="leading" secondItem="loo-cG-myf" secondAttribute="leadingMargin" id="YWP-ZC-63w"/>
                             <constraint firstItem="71x-2l-AWw" firstAttribute="trailing" secondItem="BrB-h1-WRS" secondAttribute="trailing" id="a3B-9u-pb1"/>
                             <constraint firstItem="gad-7G-M17" firstAttribute="top" secondItem="aD6-EU-VHg" secondAttribute="bottom" constant="8" id="hxd-rj-wbB"/>
@@ -131,6 +131,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="rkq-kC-rKE"/>
                     <connections>
+                        <outlet property="bottomContraint" destination="Tf0-EL-44t" id="OuX-zJ-PDz"/>
                         <outlet property="goodBadTryControl" destination="3gO-jJ-aZh" id="hbQ-fR-eGK"/>
                         <outlet property="inputTextField" destination="Qz3-BO-GPo" id="rbX-jw-Zek"/>
                         <outlet property="mappingStatusLabel" destination="aD6-EU-VHg" id="XNR-tR-am9"/>

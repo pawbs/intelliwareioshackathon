@@ -11,7 +11,10 @@ import UIKit
 class CardCollectionViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var observer:NSKeyValueObservation?
-    
+    var green:UIColor = UIColor.init(red: 184.0/255.0, green: 237.0/255.0, blue: 191.0/255.0, alpha: 1)
+    var blue:UIColor = UIColor.init(red: 164.0/255.0, green: 195.0/255.0, blue: 226.0/255.0, alpha: 1.0)
+    var red:UIColor = UIColor.init(red: 253.0/255.0, green: 127.0/255.0, blue: 124.0/255.0, alpha: 1.0)
+
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
@@ -57,11 +60,11 @@ class CardCollectionViewController : UICollectionViewController, UICollectionVie
         let card = CardDeck.instance.findCard(indexPath.row, type:Card.types[indexPath.section]);
         cell.textLabel.text = card!.text
         if (indexPath.section == 1) {
-            cell.backgroundColor = UIColor.init(red: 253.0/255.0, green: 127.0/255.0, blue: 124.0/255.0, alpha: 1.0)
+            cell.backgroundColor = red
         } else if (indexPath.section == 0) {
-            cell.backgroundColor = UIColor.init(red: 164.0/255.0, green: 195.0/255.0, blue: 226.0/255.0, alpha: 1.0)
+            cell.backgroundColor = green
         } else {
-            cell.backgroundColor = UIColor.init(red: 254.0/255.0, green: 216.0/255.0, blue: 111.0/255.0, alpha: 1.0)
+            cell.backgroundColor = blue
         }
         return cell;
     }

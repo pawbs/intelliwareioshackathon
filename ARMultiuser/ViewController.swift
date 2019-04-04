@@ -20,10 +20,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var mappingStatusLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var goodBadTryControl: UISegmentedControl!
+    @IBOutlet weak var bottomContraint: NSLayoutConstraint!
     
     // MARK: - View Life Cycle
     
     var multipeerSession: MultipeerSession!
+    var initialConstant:CGFloat!
     
     fileprivate func showDoneToolbarOnKeyboard() {
         let doneBar = UIToolbar()
@@ -38,13 +40,36 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         super.viewDidLoad()
         multipeerSession = MultipeerSession(receivedDataHandler: receivedData)
         showDoneToolbarOnKeyboard()
+        self.initialConstant = self.bottomContraint.constant;
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardShow(_:)), name:UIResponder.keyboardWillShowNotification, object:nil);
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide(_:)), name:UIResponder.keyboardWillHideNotification, object:nil);
     }
 
+    @objc func keyboardShow(_ notification:NSNotification) {
+    
+        let keyboardSize = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue;
+        
+        if (self.bottomContraint.constant == 0 || keyboardSize.cgRectValue.height > self.bottomContraint.constant) {
+            UIView.animate(withDuration:2, animations: {
+                            self.bottomContraint.constant = keyboardSize.cgRectValue.height
+                            self.view.layoutIfNeeded()  })
+        }
+    }
+
+    @objc func keyboardWillHide(_ notification:NSNotification) {
+        
+        UIView.animate(withDuration:2, animations: {
+            self.bottomContraint.constant = self.initialConstant
+            self.view.layoutIfNeeded()
+        })
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -84,6 +109,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         // Pause the view's AR session.
         sceneView.session.pause()
+
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - ARSCNViewDelegate
