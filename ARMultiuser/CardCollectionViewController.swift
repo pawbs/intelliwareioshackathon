@@ -9,15 +9,32 @@
 import UIKit
 
 class CardCollectionViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+    var observer:NSKeyValueObservation?
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return CardDeck.instance.countFor(Card.types[section]);
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.observer = CardDeck.instance.observe(\.cards, options: [.old, .new]) { (controller, change) in
+            self.cardsChanged()
+        }
+        let addButton = UIBarButtonItem.init(title: "Add", style: .plain, target: self, action: #selector(addCard(_ :)))
+        self.navigationItem.rightBarButtonItem = addButton
 
+    }
+    
+    @objc func addCard(_ sender:UIBarButtonItem) {
+        let card = Card(text:"New Card!", type:"Good");
+        CardDeck.instance.cards.append(card);
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -26,6 +43,10 @@ class CardCollectionViewController : UICollectionViewController, UICollectionVie
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    func cardsChanged() {
+        self.collectionView.reloadData()
     }
     
     override func collectionView(_ collectionView: UICollectionView,

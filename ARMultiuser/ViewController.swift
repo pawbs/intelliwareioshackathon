@@ -26,7 +26,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var multipeerSession: MultipeerSession!
     
     fileprivate func showDoneToolbarOnKeyboard() {
-        multipeerSession = MultipeerSession(receivedDataHandler: receivedData)
         let doneBar = UIToolbar()
         doneBar.sizeToFit()
         let doneButton = UIBarButtonItem.init(title: "Done", style: .plain, target: self, action: #selector(doneFromKeyboardClicked(_ :)))
@@ -37,6 +36,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        multipeerSession = MultipeerSession(receivedDataHandler: receivedData)
         showDoneToolbarOnKeyboard()
     }
     

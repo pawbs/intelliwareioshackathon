@@ -18,6 +18,8 @@
 		84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84ABEA091F3D15E70052D547 /* Assets.scnassets */; };
 		D850CFF42256595900D14C77 /* CardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850CFF32256595900D14C77 /* CardCollectionViewController.swift */; };
 		D850CFF62256686A00D14C77 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850CFF52256686A00D14C77 /* CardCollectionViewCell.swift */; };
+		D850CFF8225672B700D14C77 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850CFF7225672B700D14C77 /* Card.swift */; };
+		D850CFFA2256764F00D14C77 /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D850CFF92256764F00D14C77 /* CardDeck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		C85709121F34FC2200BB957F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D850CFF32256595900D14C77 /* CardCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewController.swift; sourceTree = "<group>"; };
 		D850CFF52256686A00D14C77 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		D850CFF7225672B700D14C77 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		D850CFF92256764F00D14C77 /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 				842316DF1F2030C300D189D1 /* AppDelegate.swift */,
 				842316E31F2030C300D189D1 /* ViewController.swift */,
 				11C983EB20953B7900394C67 /* MultipeerSession.swift */,
+				D850CFF7225672B700D14C77 /* Card.swift */,
+				D850CFF92256764F00D14C77 /* CardDeck.swift */,
 				D850CFF32256595900D14C77 /* CardCollectionViewController.swift */,
 				D850CFF52256686A00D14C77 /* CardCollectionViewCell.swift */,
 				111DC86820ACAB690037F7B1 /* RoundedButton.swift */,
@@ -179,10 +185,12 @@
 				D850CFF42256595900D14C77 /* CardCollectionViewController.swift in Sources */,
 				11E9720A209A355F006E3D26 /* Utilities.swift in Sources */,
 				111DC86920ACAB690037F7B1 /* RoundedButton.swift in Sources */,
+				D850CFFA2256764F00D14C77 /* CardDeck.swift in Sources */,
 				11C983EC20953B7900394C67 /* MultipeerSession.swift in Sources */,
 				D850CFF62256686A00D14C77 /* CardCollectionViewCell.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
 				842316E01F2030C300D189D1 /* AppDelegate.swift in Sources */,
+				D850CFF8225672B700D14C77 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
