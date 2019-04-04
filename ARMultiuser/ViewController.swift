@@ -71,6 +71,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if let name = anchor.name, name.hasPrefix("panda") {
             node.addChildNode(loadRedPandaModel(cardtext: "Textasdassadf"))
+            node.addChildNode(createTextNode(string: "some card try here"))
         }
     }
     
@@ -237,6 +238,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if let textNode = referenceNode.childNode(withName: "text", recursively: true) as? SCNText { textNode.string = "sadfasdfsadfsafd" }
     
         return referenceNode
+    }
+    
+    private func createTextNode(string: String) -> SCNNode {
+        let text = SCNText(string: string, extrusionDepth: 0.1)
+        text.font = UIFont.systemFont(ofSize: 1.0)
+        text.flatness = 0.01
+        text.firstMaterial?.diffuse.contents = UIColor.white
+        text.isWrapped = true
+        
+        let textNode = SCNNode(geometry: text)
+        
+        let fontSize = Float(0.02)
+        textNode.scale = SCNVector3(fontSize, fontSize, fontSize)
+        textNode.position = SCNVector3(-0.05, -0.03, 0);
+        textNode.eulerAngles = SCNVector3(-0.5, 0, 0);
+        
+        return textNode
     }
 }
 
