@@ -26,7 +26,6 @@ import Foundation
     }
     
     func encode(with coder: NSCoder) {
-        print("encode method invoked")
         coder.encode(self.text, forKey:"text")
         coder.encode(self.type, forKey: "type")
     }

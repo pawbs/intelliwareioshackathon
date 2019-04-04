@@ -221,15 +221,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 // Add anchor to the session, ARSCNView delegate adds visible content.
                 sceneView.session.add(anchor: anchor)
             }
-            else
-                if let card = try NSKeyedUnarchiver.unarchivedObject(ofClass: Card.self, from: data) {
-                    CardDeck.instance.cards.append(card)
-                }
             else {
                 print("unknown data recieved from \(peer)")
             }
         } catch {
             print("can't decode data recieved from \(peer)")
+        }
+        
+        do {
+            if let card = try NSKeyedUnarchiver.unarchivedObject(ofClass: Card.self, from: data) {
+                CardDeck.instance.cards.append(card)
+            }
+
+        } catch {
+            print("can't decode card data recieved from \(peer)")
         }
     }
     
