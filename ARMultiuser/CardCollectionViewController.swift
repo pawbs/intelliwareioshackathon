@@ -53,10 +53,12 @@ class CardCollectionViewController : UICollectionViewController, UICollectionVie
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell:CardCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! CardCollectionViewCell
-        cell.textLabel.text = "My item"
-        if (indexPath.section == 2) {
+
+        let card = CardDeck.instance.findCard(indexPath.row, type:Card.types[indexPath.section]);
+        cell.textLabel.text = card!.text
+        if (indexPath.section == 1) {
             cell.backgroundColor = UIColor.init(red: 253.0/255.0, green: 127.0/255.0, blue: 124.0/255.0, alpha: 1.0)
-        } else if (indexPath.section == 1) {
+        } else if (indexPath.section == 0) {
             cell.backgroundColor = UIColor.init(red: 164.0/255.0, green: 195.0/255.0, blue: 226.0/255.0, alpha: 1.0)
         } else {
             cell.backgroundColor = UIColor.init(red: 254.0/255.0, green: 216.0/255.0, blue: 111.0/255.0, alpha: 1.0)

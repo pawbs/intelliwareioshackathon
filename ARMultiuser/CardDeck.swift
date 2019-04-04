@@ -22,4 +22,20 @@ class CardDeck : NSObject {
         }
         return result
     }
+    
+    func findCard(_ index:Int, type:String) -> Card? {
+        var temp = index
+        var result:Card? = nil
+        for card in self.cards {
+            if (type == card.type) {
+                if (temp == 0) {
+                    result = card;
+                    break
+                }
+                temp -= 1;
+            }
+            
+        }
+        return result;
+    }
 }

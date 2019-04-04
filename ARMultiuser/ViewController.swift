@@ -174,12 +174,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         anchorName = "card" + String(goodBadTryControl.selectedSegmentIndex) + inputTextField.text!
         let anchor = ARAnchor(name: anchorName, transform: hitTestResult.worldTransform)
 
+        let card = Card(text: self.inputTextField.text!, type:Card.types[self.goodBadTryControl.selectedSegmentIndex]);
+        CardDeck.instance.cards .append(card);
+        
         sceneView.session.add(anchor: anchor)
         
         // Send the anchor info to peers, so they can place the same content.
         guard let data = try? NSKeyedArchiver.archivedData(withRootObject: anchor, requiringSecureCoding: true)
             else { fatalError("can't encode anchor") }
         self.multipeerSession.sendToAllPeers(data)
+
+        guard let cardData = try? NSKeyedArchiver.archivedData(withRootObject: card, requiringSecureCoding: true)
+            else { fatalError("can't encode card") }
+        self.multipeerSession.sendToAllPeers(cardData)
     }
     
     /// - Tag: GetWorldMap
@@ -214,6 +221,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 // Add anchor to the session, ARSCNView delegate adds visible content.
                 sceneView.session.add(anchor: anchor)
             }
+            else
+                if let card = try NSKeyedUnarchiver.unarchivedObject(ofClass: Card.self, from: data) {
+                    CardDeck.instance.cards.append(card)
+                }
             else {
                 print("unknown data recieved from \(peer)")
             }

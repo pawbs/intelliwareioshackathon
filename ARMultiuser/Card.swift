@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class Card : NSObject, Codable {
+@objc class Card : NSObject, NSCoding {
     
     static var types:[String] = [ "Good", "Bad", "Try" ]
     var text:String
