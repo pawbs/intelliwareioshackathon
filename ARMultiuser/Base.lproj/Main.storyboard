@@ -116,6 +116,7 @@
                         <viewLayoutGuide key="safeArea" id="71x-2l-AWw"/>
                     </view>
                     <connections>
+                        <outlet property="inputTextField" destination="Qz3-BO-GPo" id="rbX-jw-Zek"/>
                         <outlet property="mappingStatusLabel" destination="aD6-EU-VHg" id="XNR-tR-am9"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="sgr-g8-kdG"/>
                         <outlet property="sendMapButton" destination="gad-7G-M17" id="yj3-eb-u44"/>

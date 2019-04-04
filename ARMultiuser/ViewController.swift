@@ -18,15 +18,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var sendMapButton: UIButton!
     @IBOutlet weak var mappingStatusLabel: UILabel!
+    @IBOutlet weak var inputTextField: UITextField!
     
     // MARK: - View Life Cycle
     
     var multipeerSession: MultipeerSession!
     
+    fileprivate func showDoneToolbarOnKeyboard() {
+        multipeerSession = MultipeerSession(receivedDataHandler: receivedData)
+        let doneBar = UIToolbar()
+        doneBar.sizeToFit()
+        let doneButton = UIBarButtonItem.init(title: "Done", style: .plain, target: self, action: #selector(doneFromKeyboardClicked(_ :)))
+        let spacer = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        doneBar.setItems([spacer, doneButton], animated: false)
+        self.inputTextField.inputAccessoryView = doneBar
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        multipeerSession = MultipeerSession(receivedDataHandler: receivedData)
+        showDoneToolbarOnKeyboard()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,6 +67,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         // have long periods of interaction without touching the screen or buttons.
         UIApplication.shared.isIdleTimerDisabled = true
         
+    }
+    
+    @objc func doneFromKeyboardClicked(_ sender: UIBarButtonItem) {
+        self.view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
