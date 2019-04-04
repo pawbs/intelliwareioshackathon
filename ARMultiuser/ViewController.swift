@@ -89,21 +89,30 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        if let name = anchor.name, name.hasPrefix("panda") {
+        
+        if let name = anchor.name, name.hasPrefix("card") {
             var color: UIColor
-            if (goodBadTryControl.selectedSegmentIndex == 0) {
+            print("HURRDURR")
+            print(name)
+            let iColor = name.index(name.startIndex, offsetBy: 4)
+
+            print(name[iColor])
+            if (name[iColor] == "0") {
                 // Green
                 color = UIColor.green
-            } else if (goodBadTryControl.selectedSegmentIndex == 1) {
+            } else if (name[iColor] == "1") {
                 // Red
                 color = UIColor.red
             } else {
                 // Blue
                 color = UIColor.blue
             }
+                        
             node.addChildNode(loadRedPandaModel())
-            node.addChildNode(createTextNode(string: inputTextField.text!, color: color))
+            node.addChildNode(createTextNode(string: String(name.dropFirst(5)), color: color))
         }
+        
+        
     }
     
     // MARK: - ARSessionDelegate
@@ -160,7 +169,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             else { return }
         
         // Place an anchor for a virtual character. The model appears in renderer(_:didAdd:for:).
-        let anchor = ARAnchor(name: "panda", transform: hitTestResult.worldTransform)
+        
+        var anchorName: String
+        //        anchor.setValue(inputTextField.text!, forKey: "text")
+        //        anchor.setValue(goodBadTryControl.selectedSegmentIndex, forKey: "color")
+        anchorName = "card" + String(goodBadTryControl.selectedSegmentIndex) + inputTextField.text!
+        let anchor = ARAnchor(name: anchorName, transform: hitTestResult.worldTransform)
+
         sceneView.session.add(anchor: anchor)
         
         // Send the anchor info to peers, so they can place the same content.
@@ -288,5 +303,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         return textNode
     }
+    
+    
 }
 
