@@ -96,7 +96,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             print(name)
             let iColor = name.index(name.startIndex, offsetBy: 4)
 
-            
+            print(name[iColor])
             if (name[iColor] == "0") {
                 // Green
                 color = UIColor.green
@@ -107,9 +107,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 // Blue
                 color = UIColor.blue
             }
-            
-            color = UIColor.blue
-            
+                        
             node.addChildNode(loadRedPandaModel())
             node.addChildNode(createTextNode(string: String(name.dropFirst(5)), color: color))
         }
@@ -175,7 +173,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         var anchorName: String
         //        anchor.setValue(inputTextField.text!, forKey: "text")
         //        anchor.setValue(goodBadTryControl.selectedSegmentIndex, forKey: "color")
-        anchorName = "card0sdf asdf asdfa asdf sdf "
+        anchorName = "card" + String(goodBadTryControl.selectedSegmentIndex) + inputTextField.text!
         let anchor = ARAnchor(name: anchorName, transform: hitTestResult.worldTransform)
 
         sceneView.session.add(anchor: anchor)
