@@ -271,18 +271,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     private func createTextNode(string: String, color: UIColor) -> SCNNode {
-        let text = SCNText(string: string, extrusionDepth: 0.1)
-        text.font = UIFont.systemFont(ofSize: 1.0)
+        let text = SCNText(string: string, extrusionDepth: 0.05)
+        text.font = UIFont.systemFont(ofSize: 1)
         text.flatness = 0.01
         text.firstMaterial?.diffuse.contents = color
+        
+        text.containerFrame = CGRect(x: 0, y: 0.5, width: 4, height: 5)
         text.isWrapped = true
         
         let textNode = SCNNode(geometry: text)
         
         let fontSize = Float(0.02)
         textNode.scale = SCNVector3(fontSize, fontSize, fontSize)
-        textNode.position = SCNVector3(-0.05, 0, 0);
-        textNode.eulerAngles = SCNVector3(-0.5, 0, 0);
+        textNode.position = SCNVector3(-0.04, 0, 0.1);
+        textNode.eulerAngles = SCNVector3(-1, 0, 0);
         
         return textNode
     }
